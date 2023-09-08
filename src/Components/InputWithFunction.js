@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Input(){
 
     const [name,setName] = useState("Prashant");
     const [lastName,setLastname] = useState("Ghadiali");
 
-   
+   useEffect(()=> {
+        document.title = name + " " + lastName
+   }, [lastName])   // when last  name changes then it updates the title else getting Initial value. 
+
+//    If we are not adding in [] it did not updating. without [] it updates when we type.
+
+   useEffect(() => {
+     let timer = setInterval(() => {
+        console.log("Window Width : ", window.innerWidth);
+     }, 2000);
+     
+        return(clearInterval(timer));
+   })
+
     return(
         <>
         <div className="section">
@@ -34,7 +47,7 @@ function Row(props){
     const{label} = props;
     return(
         <>
-        <lable>{label}<br/></lable>
+        <label>{label}<br/></label>
         {props.children}
         <hr />
         </>
